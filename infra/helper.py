@@ -816,7 +816,7 @@ def build_image(args):
     return False
 
   if args.pull:
-    pull = True
+    pull = False
   elif args.no_pull:
     pull = False
   else:
