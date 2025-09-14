@@ -31,7 +31,11 @@ ENV RUSTUP_TOOLCHAIN=nightly-x86_64-unknown-linux-gnu
 # Build static libs for dependencies
 #
 RUN python3 -m pip install --upgrade pip
-RUN python3 -m pip install mussels
+# 新增：先安装 mussels 的依赖 gitpython（指定版本更稳定，避免最新版冲突）
+RUN python3 -m pip install gitpython==3.1.40 --no-cache-dir
+# 再安装 mussels（可选指定版本，避免最新版依赖问题）
+RUN python3 -m pip install mussels==0.4.1 --no-cache-dir
+
 RUN git clone --depth 1 https://github.com/Cisco-Talos/clamav-mussels-cookbook.git
 
 RUN mkdir /mussels
